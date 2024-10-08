@@ -6,8 +6,10 @@ class CustomAuthButton extends StatelessWidget {
   const CustomAuthButton({
     super.key,
     required this.onPress,
+    required this.title,
   });
   final void Function() onPress;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,7 +24,7 @@ class CustomAuthButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sign In',
+              title,
               style: AppTextStyles.syleSemiBold16.copyWith(
                 color: Colors.white,
               ),

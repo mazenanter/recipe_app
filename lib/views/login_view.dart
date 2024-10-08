@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
 import 'package:recipe_app/views/home_view.dart';
-import 'package:recipe_app/views/signup_view.dart';
+import 'package:recipe_app/widgets/bottom_auth_widget.dart';
 import 'package:recipe_app/widgets/custom_auth_button.dart';
 import 'package:recipe_app/widgets/custom_text_form_field.dart';
 
@@ -51,6 +51,7 @@ class LoginView extends StatelessWidget {
               height: height * 0.062,
             ),
             CustomAuthButton(
+              title: 'Sign In',
               onPress: () {
                 Navigator.push(
                     context,
@@ -62,27 +63,9 @@ class LoginView extends StatelessWidget {
             SizedBox(
               height: height * 0.032,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Don’t have an account?',
-                  style: AppTextStyles.syleMedium11,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupView(),
-                        ));
-                  },
-                  child: Text('Sign up',
-                      style: AppTextStyles.syleSemiBold11.copyWith(
-                        color: const Color(0xffFF9C00),
-                      )),
-                ),
-              ],
+            const BottomAuthWidget(
+              title: 'Don’t have an account?',
+              buttonTitle: 'Sign Up',
             ),
           ],
         ),
