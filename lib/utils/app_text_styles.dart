@@ -41,4 +41,8 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: Color(0xffA9A9A9),
   );
+  static const TextStyle syleMedium11 = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+  );
 }
