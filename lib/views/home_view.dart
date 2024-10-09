@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
+import 'package:recipe_app/views/add_recipe_view.dart';
+import 'package:recipe_app/widgets/fab_button.dart';
 import 'package:recipe_app/widgets/header_home.dart';
 import 'package:recipe_app/widgets/recipe_item.dart';
 import 'package:recipe_app/widgets/search_text_field.dart';
@@ -55,6 +57,16 @@ class HomeView extends StatelessWidget {
           ],
         ),
       )),
+      floatingActionButton: FabButtom(
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddRecipeView(),
+            ),
+          );
+        },
+      ),
     );
   }
 }
