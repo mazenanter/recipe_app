@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
 import 'package:recipe_app/views/add_recipe_view.dart';
+import 'package:recipe_app/views/details_view.dart';
 import 'package:recipe_app/widgets/fab_button.dart';
 import 'package:recipe_app/widgets/header_home.dart';
 import 'package:recipe_app/widgets/recipe_item.dart';
@@ -52,7 +53,16 @@ class HomeView extends StatelessWidget {
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 15,
               ),
-              itemBuilder: (context, index) => const RecipeItem(),
+              itemBuilder: (context, index) => RecipeItem(
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailsView(),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
