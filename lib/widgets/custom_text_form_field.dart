@@ -5,11 +5,17 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.hintText,
+    required this.controller,
+    this.validator,
   });
   final String? hintText;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
