@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
 import 'package:recipe_app/views/home_view.dart';
+import 'package:recipe_app/views/signup_view.dart';
 import 'package:recipe_app/widgets/bottom_auth_widget.dart';
 import 'package:recipe_app/widgets/custom_auth_button.dart';
 import 'package:recipe_app/widgets/custom_text_form_field.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  var emailController = TextEditingController();
+
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -36,7 +47,9 @@ class LoginView extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const CustomTextFormField(),
+            CustomTextFormField(
+              controller: emailController,
+            ),
             SizedBox(
               height: height * 0.030,
             ),
@@ -46,7 +59,9 @@ class LoginView extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const CustomTextFormField(),
+            CustomTextFormField(
+              controller: passwordController,
+            ),
             SizedBox(
               height: height * 0.062,
             ),
@@ -63,7 +78,15 @@ class LoginView extends StatelessWidget {
             SizedBox(
               height: height * 0.032,
             ),
-            const BottomAuthWidget(
+            BottomAuthWidget(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignupView(),
+                  ),
+                );
+              },
               title: 'Don’t have an account?',
               buttonTitle: 'Sign Up',
             ),
