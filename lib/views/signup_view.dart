@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/services/firebase_services.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
+import 'package:recipe_app/utils/custom_indicator.dart';
+import 'package:recipe_app/utils/custom_snack_bar.dart';
 import 'package:recipe_app/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:recipe_app/views/login_view.dart';
 import 'package:recipe_app/widgets/bottom_auth_widget.dart';
@@ -28,17 +30,18 @@ class _SignupViewState extends State<SignupView> {
       child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
           if (state is SignUpSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('email created successfully'),
-              ),
-            );
+            customSnackBar(context, 'email created successfully');
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const LoginView(),
               ),
               (route) => false,
+            );
+          } else if (state is SignUpError) {
+            customSnackBar(
+              context,
+              state.errMsg,
             );
           }
         },
@@ -121,8 +124,7 @@ class _SignupViewState extends State<SignupView> {
                     SizedBox(
                       height: height * 0.062,
                     ),
-                    if (state is SignUpLoading)
-                      const Center(child: CircularProgressIndicator()),
+                    if (state is SignUpLoading) const CustomIndicator(),
                     if (state is SignUpInitial || state is SignUpSuccess)
                       CustomAuthButton(
                         title: 'Sign Up',
