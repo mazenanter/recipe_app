@@ -12,32 +12,33 @@ class AddRecipeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            Text(
+            const Text(
               'Create recipe',
               style: AppTextStyles.syleSemiBold24,
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            CustomRecipeAddImage(),
-            SizedBox(
+            const CustomRecipeAddImage(),
+            const SizedBox(
               height: 20,
             ),
             CustomTextFormField(
+              controller: TextEditingController(),
               hintText: 'Recipe Name',
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Row(
+            const Row(
               children: [
                 CustomAlertDialogButton(),
                 Text(
@@ -47,10 +48,10 @@ class AddRecipeView extends StatelessWidget {
               ],
             ),
             //IngredientsItem(ingredients: ingredients),
-            SizedBox(
+            const SizedBox(
               height: 28,
             ),
-            CustomButton(),
+            const CustomButton(),
           ],
         ),
       ),
