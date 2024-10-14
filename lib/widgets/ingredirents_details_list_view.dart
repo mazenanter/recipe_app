@@ -5,8 +5,9 @@ import 'package:recipe_app/utils/app_text_styles.dart';
 class IngredientsDetailsListView extends StatelessWidget {
   const IngredientsDetailsListView({
     super.key,
+    required this.title,
   });
-
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,8 +15,8 @@ class IngredientsDetailsListView extends StatelessWidget {
       child: Card(
         color: AppColors.cardColor,
         child: ListTile(
-          title: const Text(
-            'Bread',
+          title: Text(
+            title,
             style: AppTextStyles.syleSemiBold16,
           ),
           trailing: const Text(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/models/recipe_model.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
 import 'package:recipe_app/widgets/ingredirents_details_list_view.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({super.key});
-
+  const DetailsView({super.key, required this.recipeModel});
+  final RecipeModel recipeModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +18,8 @@ class DetailsView extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            const Text(
-              'How to make french toast',
+            Text(
+              'How to make ${recipeModel.recipeTitle}',
               style: AppTextStyles.syleSemiBold24,
             ),
             const SizedBox(
@@ -27,9 +28,12 @@ class DetailsView extends StatelessWidget {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: const Image(
-                  image: AssetImage(
-                    'assets/image 13.png',
+                child: Image(
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                  image: NetworkImage(
+                    recipeModel.image,
                   ),
                 ),
               ),
@@ -46,9 +50,10 @@ class DetailsView extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemBuilder: (context, index) =>
-                    const IngredientsDetailsListView(),
-                itemCount: 10,
+                itemBuilder: (context, index) => IngredientsDetailsListView(
+                  title: recipeModel.ingredients[index],
+                ),
+                itemCount: recipeModel.ingredients.length,
               ),
             ),
           ],

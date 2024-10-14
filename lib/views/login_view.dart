@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/services/firebase_services.dart';
@@ -92,6 +93,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                     CustomTextFormField(
+                      secureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Must not be empty';
@@ -103,9 +105,10 @@ class _LoginViewState extends State<LoginView> {
                     SizedBox(
                       height: height * 0.062,
                     ),
-                    if (state is LoginLoading) const CustomIndicator(),
-                    if (state is LoginInitial || state is LoginSuccess)
-                      CustomAuthButton(
+                    ConditionalBuilder(
+                      condition: state is LoginLoading,
+                      builder: (context) => const CustomIndicator(),
+                      fallback: (context) => CustomAuthButton(
                         title: 'Sign In',
                         onPress: () {
                           if (formKey.currentState!.validate()) {
@@ -116,6 +119,7 @@ class _LoginViewState extends State<LoginView> {
                           }
                         },
                       ),
+                    ),
                     SizedBox(
                       height: height * 0.032,
                     ),

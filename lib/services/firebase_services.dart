@@ -113,4 +113,16 @@ class FirebaseServices {
       return null;
     }
   }
+
+  Future<Either<FirebaseFailure, List<RecipeModel>>> getRecipes() async {
+    try {
+      var firestore = FirebaseFirestore.instance;
+      var data = await firestore.collection('recipes').get();
+      List<RecipeModel> recipes =
+          data.docs.map((doc) => RecipeModel.fromJson(doc.data())).toList();
+      return right(recipes);
+    } catch (e) {
+      return left(FirebaseServerFailure(e.toString()));
+    }
+  }
 }
