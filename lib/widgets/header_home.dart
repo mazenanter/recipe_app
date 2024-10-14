@@ -15,7 +15,7 @@ class CustomHeaderHome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello Jega',
+              'Hello,',
               style: AppTextStyles.syleSemiBold20,
             ),
             Text(

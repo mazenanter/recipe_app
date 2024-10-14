@@ -125,4 +125,21 @@ class FirebaseServices {
       return left(FirebaseServerFailure(e.toString()));
     }
   }
+
+  Future<Either<FirebaseFailure, List<RecipeModel>>> searchRecipes(
+      {required String q}) async {
+    try {
+      var firestore = FirebaseFirestore.instance;
+      var data = await firestore
+          .collection('recipes')
+          .where('recipeTitle', isGreaterThanOrEqualTo: q)
+          .where('recipeTitle', isLessThanOrEqualTo: '$q\uf8ff')
+          .get();
+      List<RecipeModel> recipes =
+          data.docs.map((doc) => RecipeModel.fromJson(doc.data())).toList();
+      return right(recipes);
+    } catch (e) {
+      return left(FirebaseServerFailure(e.toString()));
+    }
+  }
 }
