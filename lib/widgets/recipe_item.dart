@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/models/recipe_model.dart';
 import 'package:recipe_app/utils/app_text_styles.dart';
 
 class RecipeItem extends StatelessWidget {
-  const RecipeItem({super.key, required this.onPress});
+  const RecipeItem(
+      {super.key, required this.onPress, required this.recipeModel});
   final Function() onPress;
+  final RecipeModel recipeModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,9 +22,9 @@ class RecipeItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: AspectRatio(
                 aspectRatio: 1,
-                child: Image.asset(
+                child: Image.network(
                   fit: BoxFit.fill,
-                  'assets/mae-mu-H5Hj8QV2Tx4-unsplash 1.png',
+                  recipeModel.image,
                 ),
               ),
             ),
@@ -51,7 +54,7 @@ class RecipeItem extends StatelessWidget {
                     children: [
                       Text(
                         maxLines: 2,
-                        'Traditional spare ribs baked',
+                        recipeModel.recipeTitle,
                         style: AppTextStyles.syleSemiBold11.copyWith(
                           fontSize: 12,
                           color: Colors.white,
@@ -59,11 +62,11 @@ class RecipeItem extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
                         child: Text(
                           maxLines: 2,
-                          'By Chef John',
+                          recipeModel.userName,
                           style: AppTextStyles.syleRegular8,
                         ),
                       ),

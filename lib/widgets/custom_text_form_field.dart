@@ -7,13 +7,16 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     required this.controller,
     this.validator,
+    this.secureText = false,
   });
   final String? hintText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final bool secureText;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: secureText ? true : false,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(

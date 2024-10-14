@@ -4,8 +4,11 @@ import 'package:recipe_app/utils/app_colors.dart';
 class CustomAlertDialogButton extends StatelessWidget {
   const CustomAlertDialogButton({
     super.key,
+    required this.ingredientController,
+    required this.onPressed,
   });
-
+  final TextEditingController ingredientController;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -18,8 +21,6 @@ class CustomAlertDialogButton extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            TextEditingController ingredientController =
-                TextEditingController();
             return AlertDialog(
               title: const Text('Add Ingredient'),
               content: TextField(
@@ -28,9 +29,7 @@ class CustomAlertDialogButton extends StatelessWidget {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: onPressed,
                   child: const Text('Add'),
                 ),
               ],
